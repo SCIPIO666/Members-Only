@@ -5,7 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var userRouter = require('./routes/userRoutes');
+const adminRouter=require('./routes/adminRoutes')
+const authRouter=require('./routes/authRoutes')
+const messageRouter=require('./routes/messageRoutes')
 
 var app = express();
 
@@ -20,7 +23,10 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.use('/user', userRouter);
+app.use('/admin',adminRouter);
+app.use('/messages',messageRouter);
+app.use('./auth',authRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -38,4 +44,8 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+
+app.listen(3000,'localhost',()=>{
+  console.log('app is live on portal 3000')
+})
 module.exports = app;
