@@ -6,11 +6,11 @@ async function findUserByEmail(email){
         const user = result.rows[0];
         if (!user){
             throw new Error ('user not found')
-            logger.error('user not found')
+            logger.info('user not found')
         }else
             return user
      } catch (error) {
-        
+        logger.error(error.message)
     }
 }
 async function findUserById(id){
